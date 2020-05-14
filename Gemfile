@@ -20,6 +20,7 @@ gem 'slim', '~> 4.1'
 
 group :test do
   gem 'rspec-rails', '~> 4.0'
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
