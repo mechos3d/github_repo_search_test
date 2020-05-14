@@ -9,9 +9,14 @@ gem 'rails', '~> 6.0.3'
 gem 'puma', '~> 4.1'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+gem 'sass-rails', '>= 6'
+gem 'webpacker', '~> 5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+
+# Templating:
+gem 'slim', '~> 4.1'
 
 group :test do
   gem 'rspec-rails', '~> 4.0'
