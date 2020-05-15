@@ -1,28 +1,22 @@
 class RepositoriesController < ApplicationController
-  # TODO: Make Ajax request to refresh list of repositories.
+  # TODO: Make Ajax request to refresh list of repositories instead of rerendering the page
   def index
-    if params[:query]
-      process_repositories_query
-    else
-      @repositories = []
-    end
+    process_repositories_query if params[:query]
+
+    @repositories ||= []
+    @error_message ||= nil
   end
 
   private
 
   def process_repositories_query
-    res = Github::Client::RepositoriesSearch.new(query: params[:query]).call
+    response = Github::Client::RepositoriesSearch.new(query: params[:query]).call
 
-    if res.success?
-      @repositories = JSON.parse(res.body)['items'].map do |el|
-        # TODO: move this to a presenter:
-        el.slice('full_name', 'html_url', 'description')
-      end
+    if response.success?
+      @repositories = Repositories::Formatter.new.call(response)
     else
-      # TODO: add more details here of course:
-      # TODO: return non-200 http code on non-successful github request
-      flash.now[:alert] = "Something went wrong"
-      @repositories = []
+      # TODO: add more details about the error
+      @error_message = 'Something went wrong'
     end
   end
 end

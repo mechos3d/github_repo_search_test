@@ -6,10 +6,14 @@ div
       = text_field_tag(:query)
       = submit_tag('Search')
 
-- @repositories.each do |repo|
+- if @error_message
   p
-    div
-      = link_to(repo['full_name'], repo['html_url'])
-    div
-      = repo['description']
+    = @error_message
+- else
+  - @repositories.each do |repo|
+    p
+      div
+        = link_to(repo['full_name'], repo['html_url'])
+      div
+        = repo['description']
 

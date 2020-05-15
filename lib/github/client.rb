@@ -3,7 +3,9 @@
 module Github
   class Client
     BASE_URL = 'https://api.github.com/' # TODO: can take this from application settings
-    # TODO: definitely need to place them in application global settings and get them fron ENV:
-    CREDENTIALS = 'username:api_token'
+
+    # TODO: Although 'Settings' (gem 'config') supports ERB in it -
+    # for some reason it cannot get ENV-variables here, hence this crutch:
+    AUTHORIZATION = Settings.github.client.authorization || ENV.fetch('GITHUB_AUTHORIZATION')
   end
 end

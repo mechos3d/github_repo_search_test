@@ -15,7 +15,7 @@ module Github
       # not system-wide Settings. Nothing in 'lib' folder need to depend from the application itself.
       def call
         Faraday.get(url) do |req|
-          req.headers['Authorization'] = "Basic #{Settings.github.client.authorization}"
+          req.headers['Authorization'] = "Basic #{Github::Client::AUTHORIZATION}"
         end
       end
 
