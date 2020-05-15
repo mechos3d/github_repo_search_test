@@ -9,8 +9,7 @@ describe 'Repositories', type: :request do
     let(:headers) { {} }
 
     it 'renders the page' do
-      # get '/repositories', params: params, headers: headers
-      get '/repositories'
+      get '/repositories', params: params, headers: headers
 
       expect(response).to render_template(:index)
     end

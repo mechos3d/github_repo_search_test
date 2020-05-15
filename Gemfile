@@ -18,6 +18,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Templating:
 gem 'slim', '~> 4.1'
 
+gem 'faraday', '~> 1.0'
+
 group :test do
   gem 'rspec-rails', '~> 4.0'
   gem 'rails-controller-testing'
