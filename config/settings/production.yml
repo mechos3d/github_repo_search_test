@@ -1,0 +1,3 @@
+github:
+  client:
+    authorization: <%= ENV.fetch('GITHUB_AUTHORIZATION') %>

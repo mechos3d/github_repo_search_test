@@ -20,9 +20,12 @@ gem 'slim', '~> 4.1'
 
 gem 'faraday', '~> 1.0'
 
+gem 'config'
+
 group :test do
   gem 'rspec-rails', '~> 4.0'
   gem 'rails-controller-testing'
+  gem 'webmock'
 end
 
 group :development, :test do
