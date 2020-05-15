@@ -7,4 +7,9 @@ div
       = submit_tag('Search')
 
 - @repositories.each do |repo|
-  p = repo
+  p
+    div
+      = link_to(repo['full_name'], repo['html_url'])
+    div
+      = repo['description']
+
