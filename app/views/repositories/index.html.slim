@@ -1,6 +1,10 @@
 h1 There be repositories
 div
-  = form_with(url: '/repositories', method: 'get') do
-    = label_tag(:query, 'Search for:')
-    = text_field_tag(:query)
-    = submit_tag('Search')
+  div
+    = form_with(url: '/repositories', method: 'get') do
+      = label_tag(:query, 'Search for:')
+      = text_field_tag(:query)
+      = submit_tag('Search')
+
+- @repositories.each do |repo|
+  p = repo
