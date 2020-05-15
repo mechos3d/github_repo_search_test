@@ -25,7 +25,7 @@ module Github
 
       def url
         query_sting = "?q=#{query}&sort=#{sort}&order=#{order}"
-        File.join(Github::Client::BASE_URL, URL, query_sting)
+        File.join(Github::Client::BASE_URL, URL) + query_sting
       end
     end
   end
