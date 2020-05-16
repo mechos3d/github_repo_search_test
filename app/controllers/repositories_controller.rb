@@ -11,8 +11,9 @@ class RepositoriesController < ApplicationController
     if response.success?
       @formatted_response = Repositories::Formatter.new(response).call
     else
-      # TODO: add more details about the error
-      @error_message = 'Something went wrong'
+      fail_processor = Repositories::GithubFailedResponseProcessor.new(response)
+      fail_processor.call
+      @error_message = fail_processor.frontend_error_message
     end
   end
 
