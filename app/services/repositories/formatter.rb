@@ -18,10 +18,10 @@ module Repositories
     end
 
     def repositories
-      parsed_body['items'].map do |el|
-        el.slice('full_name', 'html_url', 'description').tap do |new_el|
-          new_el['avatar_url'] = el['owner']['avatar_url']
-        end
+      parsed_body['items'].map do |item|
+        formatted_item = item.slice('full_name', 'html_url', 'description')
+        formatted_item['avatar_url'] = item['owner']['avatar_url']
+        formatted_item
       end
     end
 
