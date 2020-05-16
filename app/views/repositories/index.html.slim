@@ -36,6 +36,7 @@
         .col-md-8
           .col-md-4
             = submit_tag('Search', name: nil, class: 'btn btn-lg btn-primary')
+
 - if @formatted_response
   hr
   .row
@@ -46,12 +47,13 @@
           = @formatted_response[:total_count]
         h5
         = "(showing #{Github::Client::RepositoriesSearch::DEFAULT_PER_PAGE} per page):"
+
+- if @error_message
   hr
+  div class="alert alert-danger" role="role"
+    = @error_message
 
-  - if @error_message
-    div class="alert alert-danger" role="role"
-      = @error_message
-
+- if @formatted_response
   .table-responsive
     table class='table table-striped'
       tbody

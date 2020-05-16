@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Repositories', type: :request do
   RSpec.shared_examples 'successfully_renders_the_page' do
-    it 'renders the page' do
+    it do
       get '/repositories', params: params, headers: headers
 
       expect(response).to render_template(:index)

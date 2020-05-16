@@ -1,5 +1,7 @@
 class RepositoriesController < ApplicationController
   def index
+    return unless params_validation.errors.empty?
+
     process_repositories_query if params[:query]
   end
 
@@ -18,9 +20,21 @@ class RepositoriesController < ApplicationController
   end
 
   def index_search_params
-    params.permit!
-          .slice(:query, :sort, :order, :page)
-          .to_h
-          .each_with_object({}) { |(k, v), memo| memo[k.to_sym] = v if v }
+    @index_search_params ||= begin
+      params.permit!
+            .slice(:query, :sort, :order, :page)
+            .to_h
+            .each_with_object({}) { |(k, v), memo| memo[k.to_sym] = v if v }
+    end
+  end
+
+  def params_validation
+    Repositories::ParamsValidator.call(index_search_params).tap do |x|
+      # TODO: of course, the error message needs to be better formatted
+      #       and also use I18n, not just 'as_json'
+      @error_message = x.errors.as_json unless x.errors.empty?
+    end
+    # NOTE: maybe better to make it a 'before_action', fill 'errors' flash-message here
+    # and perform a redirect ?
   end
 end
