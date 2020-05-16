@@ -11,8 +11,6 @@ module Github
         @order = order
       end
 
-      # TODO: Better to keep this authorization data in Github module itself,
-      # not system-wide Settings. Nothing in 'lib' folder need to depend from the application itself.
       def call
         Faraday.get(url) do |req|
           req.headers['Authorization'] = "Basic #{Github::Client::AUTHORIZATION}"
