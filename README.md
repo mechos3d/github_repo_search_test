@@ -16,4 +16,6 @@
 - Return an error by the Formatter class instead of exception if, for some reason, Github returned an invalid JSON.
 - Fix the error 'ActionView::Template::Error: The asset "foo4" is not present in the asset pipeline.' when avatar url is invalid (not a url)
 - All the UI texts must use I18n
+- UI: add a note what the default sorting order for github is
+- UI: show on the page more info in the list of repos: number of stars, issues, forks etc
 

@@ -25,7 +25,7 @@
             .col-md-4
               = label_tag(:order, 'Order:')
             .col-md-4
-              = select_tag(:order, options_for_select(['desc', 'asc'], params[:sort] || 'desc'), class: "form-control")
+              = select_tag(:order, options_for_select(['desc', 'asc'], params[:order] || 'desc'), class: "form-control")
       .row
         .col-md-8
           .col-md-4
