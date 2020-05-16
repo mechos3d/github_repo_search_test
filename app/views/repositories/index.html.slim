@@ -1,19 +1,70 @@
-h1 There be repositories
-div
-  div
+.jumbotron
+  .row
+    .col-md-12
+      h1 Github repositories search test
+
+.row
+  .col-md-12
     = form_with(url: '/repositories', method: 'get') do
-      = label_tag(:query, 'Search for:')
-      = text_field_tag(:query)
-      = submit_tag('Search')
+      .row
+        .col-md-8
+          .col-md-4
+            = label_tag(:query, 'Search for:')
+          .col-md-4
+            = text_field_tag(:query, params[:query])
+      .row
+        .col-md-8
+          .form-group
+            .col-md-4
+              = label_tag(:sort, 'Sort by:')
+            .col-md-4
+              = select_tag(:sort, options_for_select([nil, 'stars', 'forks', 'help-wanted-issues', 'updated'], params[:sort]), class: "form-control")
+      .row
+        .col-md-8
+          .form-group
+            .col-md-4
+              = label_tag(:order, 'Order:')
+            .col-md-4
+              = select_tag(:order, options_for_select(['desc', 'asc'], params[:sort] || 'desc'), class: "form-control")
+      .row
+        .col-md-8
+          .col-md-4
+            = label_tag(:page, 'Page number:')
+          .col-md-4
+            = number_field_tag(:page, params[:page], min: 1)
+      p
+        .col-md-8
+          .col-md-4
+            = submit_tag('Search', name: nil, class: 'btn btn-lg btn-primary')
+
+hr
+.row
+  .col-md-8
+    // TODO: fix the hardcoded '30 per page'
+    .col-md-8
+      h4
+        Found repos:
+        = @formatted_response[:total_count]
+      h5
+      = "(showing #{Github::Client::RepositoriesSearch::DEFAULT_PER_PAGE} per page):"
+hr
 
 - if @error_message
-  p
+  div class="alert alert-danger" role="role"
     = @error_message
-- else
-  - @repositories.each do |repo|
-    p
-      div
-        = link_to(repo['full_name'], repo['html_url'])
-      div
-        = repo['description']
+
+.table-responsive
+  table class='table table-striped'
+    tbody
+      - (@formatted_response[:repositories] || []).each do |repo|
+        tr
+          - if repo['avatar_url']
+            td
+              div
+                = image_tag(repo['avatar_url'], height: '80', width: '80')
+          td
+            div
+              = link_to(repo['full_name'], repo['html_url'])
+            div
+              = repo['description']
 
