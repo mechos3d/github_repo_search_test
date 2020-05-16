@@ -14,9 +14,9 @@ module Github
       end
 
       def call
-        # TODO: add explicit timeout values
         Faraday.get(url) do |req|
           req.headers['Authorization'] = "token #{Github::Client::AUTHORIZATION}"
+          req.options.timeout = 5
         end
       end
 
