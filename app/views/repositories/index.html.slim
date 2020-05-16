@@ -36,35 +36,34 @@
         .col-md-8
           .col-md-4
             = submit_tag('Search', name: nil, class: 'btn btn-lg btn-primary')
-
-hr
-.row
-  .col-md-8
-    // TODO: fix the hardcoded '30 per page'
+- if @formatted_response
+  hr
+  .row
     .col-md-8
-      h4
-        Found repos:
-        = @formatted_response[:total_count]
-      h5
-      = "(showing #{Github::Client::RepositoriesSearch::DEFAULT_PER_PAGE} per page):"
-hr
+      .col-md-8
+        h4
+          Found repos:
+          = @formatted_response[:total_count]
+        h5
+        = "(showing #{Github::Client::RepositoriesSearch::DEFAULT_PER_PAGE} per page):"
+  hr
 
-- if @error_message
-  div class="alert alert-danger" role="role"
-    = @error_message
+  - if @error_message
+    div class="alert alert-danger" role="role"
+      = @error_message
 
-.table-responsive
-  table class='table table-striped'
-    tbody
-      - (@formatted_response[:repositories] || []).each do |repo|
-        tr
-          - if repo['avatar_url']
+  .table-responsive
+    table class='table table-striped'
+      tbody
+        - (@formatted_response[:repositories] || []).each do |repo|
+          tr
+            - if repo['avatar_url']
+              td
+                div
+                  = image_tag(repo['avatar_url'], height: '80', width: '80')
             td
               div
-                = image_tag(repo['avatar_url'], height: '80', width: '80')
-          td
-            div
-              = link_to(repo['full_name'], repo['html_url'])
-            div
-              = repo['description']
+                = link_to(repo['full_name'], repo['html_url'])
+              div
+                = repo['description']
 

@@ -4,14 +4,15 @@ require 'rails_helper'
 
 describe 'Repositories', type: :request do
   describe 'GET /repositories/' do
+    context 'with empty params' do
+      let(:params)  { {} }
+      let(:headers) { {} }
 
-    let(:params) { {} }
-    let(:headers) { {} }
+      it 'renders the page' do
+        get '/repositories', params: params, headers: headers
 
-    it 'renders the page' do
-      get '/repositories', params: params, headers: headers
-
-      expect(response).to render_template(:index)
+        expect(response).to render_template(:index)
+      end
     end
   end
 end

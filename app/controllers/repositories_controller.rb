@@ -1,7 +1,6 @@
 class RepositoriesController < ApplicationController
   def index
     process_repositories_query if params[:query]
-    @error_message ||= nil
   end
 
   private
@@ -21,6 +20,6 @@ class RepositoriesController < ApplicationController
     params.permit!
           .slice(:query, :sort, :order, :page)
           .to_h
-          .each_with_object({}) { |(k,v), memo| memo[k.to_sym] = v if v }
+          .each_with_object({}) { |(k, v), memo| memo[k.to_sym] = v if v }
   end
 end

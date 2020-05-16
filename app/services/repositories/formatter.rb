@@ -1,6 +1,5 @@
 module Repositories
   class Formatter
-
     def initialize(raw_response)
       @raw_response = raw_response
     end

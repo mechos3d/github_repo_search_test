@@ -1,1 +1,70 @@
 inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.7.1
+  Exclude:
+    - bin/*
+    - node_modules/**/**/**/*
+    - vendor/bundle/**/*
+    - config/initializers/config.rb
+
+Layout/HashAlignment:
+  EnforcedColonStyle:
+    - table
+    - key
+
+Layout/LineLength:
+  Max: 100
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/BlockLength:
+  Max: 25
+  ExcludedMethods: [describe, context, group]
+
+Metrics/ClassLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 20
+
+Rails:
+  Enabled: true
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+
+RSpec/MultipleExpectations:
+  Max: 5
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/LetSetup:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
