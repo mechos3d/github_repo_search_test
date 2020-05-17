@@ -35,3 +35,10 @@ docker run -p 3000:3000 github_repo_search_test:latest
 - UI/UX: show on the page more info in the list of repos: number of stars, issues, forks etc.
 - Add an option to change number of items shown on the page.
 
+----
+
+## NOTES:
+- I chose not to implement SPA here (I'm not using Ajax to refresh the list of repos).
+  I'm convinced that the main functionality of the site, whenever possible, should not rely on javascript being enabled.        
+  Maybe I'm a bit conservative like that :) 
+
