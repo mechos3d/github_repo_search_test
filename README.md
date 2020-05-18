@@ -19,6 +19,7 @@ docker run -p 3000:3000 github_repo_search_test:latest
 ## TODOS:
 
 - If we encounter and handle some errors - the page is rendered with a 200 "OK" status. But in some cases maybe better to render the page with 4xx status.
+- In case of a request timeout - Faraday will raise an exception. Need to rescue it and show some reasonable message to the user.
 - UI/UX: add better pagination with a list of numbers denoting pages, 'next' and 'previous', 'first', 'last' buttons (using Kaminari for example).
 - Fix exception for too big page request: `/repositories?query=foo&sort=&order=desc&page=1000000000`
 - URI::InvalidURIError - some characters will raise this exception - need to sanitize the user's input. 
