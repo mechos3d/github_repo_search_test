@@ -18,6 +18,8 @@ class RepositoriesController < ApplicationController
   # TODO: of course, the error message needs to be better formatted
   #       and also use I18n, not just 'as_json'
   def validate_params
+    return(render(:index)) if index_search_params[:query].blank?
+
     validator = Repositories::ParamsValidator.call(index_search_params)
     return if validator.errors.blank?
 
