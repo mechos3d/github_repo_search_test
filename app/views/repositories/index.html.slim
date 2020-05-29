@@ -44,7 +44,7 @@
       .col-md-8
         h4
           Found repos:
-          = @formatted_response[:total_count]
+          = @formatted_response.total_count
         h5
         = "(showing #{Github::Client::RepositoriesSearch::DEFAULT_PER_PAGE} per page):"
 
@@ -57,7 +57,7 @@
   .table-responsive
     table class='table table-striped'
       tbody
-        - (@formatted_response[:repositories] || []).each do |repo|
+        - (@formatted_response.repositories || []).each do |repo|
           tr
             - if repo.avatar_url
               td

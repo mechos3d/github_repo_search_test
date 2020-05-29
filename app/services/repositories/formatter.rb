@@ -5,10 +5,8 @@ module Repositories
     end
 
     def call
-      {
-        repositories: repositories,
-        total_count:  parsed_body['total_count']
-      }
+      Result.new(repositories: repositories,
+                 total_count:  parsed_body['total_count'])
     end
 
     private
