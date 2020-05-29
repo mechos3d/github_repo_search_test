@@ -8,8 +8,8 @@ module Repositories
       if github_response.success?
         { response: Formatter.new(github_response).call }
       else
-        fail_processor = GithubFailedResponseProcessor.new(github_response).tap(&:call)
-        { error_message: fail_processor.frontend_error_message }
+        ErrorNotifier.call(github_response)
+        { error_message: ErrorMessageChooser.call(github_response) }
       end
     end
 
