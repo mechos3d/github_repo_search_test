@@ -14,6 +14,7 @@ module Repositories
     end
 
     def call
+      validate_query_presence
       validate_query_length
       # TODO: Other validations can be implemented here
       self
@@ -22,6 +23,10 @@ module Repositories
     private
 
     attr_reader :params
+
+    def validate_query_presence
+      errors.add(:query, 'Query must be filled') if params[:query].blank?
+    end
 
     def validate_query_length
       return unless params[:query] && params[:query].size > MAX_QUERY_LENGTH
