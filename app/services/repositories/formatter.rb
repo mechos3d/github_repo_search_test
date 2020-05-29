@@ -19,9 +19,9 @@ module Repositories
 
     def repositories
       parsed_body['items'].map do |item|
-        formatted_item = item.slice('full_name', 'html_url', 'description')
-        formatted_item['avatar_url'] = item['owner']['avatar_url']
-        formatted_item
+        attributes = item.slice('full_name', 'html_url', 'description')
+        attributes['avatar_url'] = item['owner']['avatar_url']
+        Repository.new(attributes)
       end
     end
 
